@@ -11,15 +11,25 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
+
+// Middleware
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 app.us(express.json());
 
+
+// Routes
 app.get('/', (req,res) => {
-  res.send('Hello world!');
+  res.send('GET Request received');
 });
 
+app.post('/', (req,res) => {
+  res.send('POST Request received');
+});
+
+
+// Error Handling Middleware
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV ==='production') {
